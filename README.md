@@ -27,23 +27,25 @@ The system streamlines inventory management by providing tools for **product, su
 ---
 
 ## 👥 Team Members
-- **Gerunda, Rhoddz M.** – FullStack Developer
+- **Gerunda, Rhoddz M.** – Full Stack Developer  
 - **Fuentes, Aubrien** – UX/UI Developer  
-- **Gonzalez, Vince Jon M.** – (Role: FullStack Developer)  
-- **Padilla, Thea Francine** – (Role: FrontEnd Developer)  
-- **Mondelo, Joanna Alyssa** – (Role: FrontEnd Developer)  
-- **Delima, Clive Owen** – (Role: Backend Developer)  
+- **Gonzalez, Vince Jon M.** – Full Stack Developer  
+- **Padilla, Thea Francine** – Frontend Developer  
+- **Mondelo, Joanna Alyssa** – Frontend Developer  
+- **Delima, Clive Owen** – Backend Developer  
 
 ---
 
 ## 📂 Repository Structure
+```
 
-/docs → project documentation (SRS, diagrams, etc.)\n
-/frontend → UI components (HTML, CSS, JS)\n
-/backend → PHP logic and controllers\n
-/database → SQL schema and seed data\n
-/logos → images and logos
+/docs       → project documentation (SRS, diagrams, etc.)
+/frontend   → UI components (HTML, CSS, JS)
+/backend    → PHP logic and controllers
+/database   → SQL schema and seed data
+/logos      → images and logos
 
+````
 
 ---
 
@@ -59,19 +61,17 @@ Each member is responsible for at least two feature branches, merged into `main`
 ## ✅ Getting Started
 1. Clone this repository:  
    ```bash
-   git clone https://github.com/erunzd/<culc-inventory-system>.git
+   git clone https://github.com/erunzd/culc-inventory-system.git
+````
 
+2. Import the database schema from `/database/culc_inventory.sql`
+3. Configure your web server (XAMPP, WAMP, or similar) to serve `/frontend` and connect to the backend.
+4. Run the system locally and start testing features.
 
-Import the database schema from /database/culc_inventory.sql
+---
 
-Configure your web server (XAMPP, WAMP, or similar) to serve /frontend and connect to the backend.
+## 📌 Project Management
 
-Run the system locally and start testing features.
-
-📌 Project Management
-
-GitHub Projects – Task tracking (Kanban board)
-
-Figma – UI/UX design and mockups
-
-Draw.io / Lucidchart – System and database diagrams
+* **GitHub Projects** – Task tracking (Kanban board)
+* **Figma** – UI/UX design and mockups
+* **Draw\.io / Lucidchart** – System and database diagrams
