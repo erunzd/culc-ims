@@ -38,11 +38,11 @@ The system streamlines inventory management by providing tools for **product, su
 
 ## 📂 Repository Structure
 
-/docs → project documentation (SRS, diagrams, etc.)
-/frontend → UI components (HTML, CSS, JS)
-/backend → PHP logic and controllers
-/database → SQL schema and seed data
-/tests → QA test cases and scripts
+/docs → project documentation (SRS, diagrams, etc.)\n
+/frontend → UI components (HTML, CSS, JS)\n
+/backend → PHP logic and controllers\n
+/database → SQL schema and seed data\n
+/logos → images and logos
 
 
 ---
