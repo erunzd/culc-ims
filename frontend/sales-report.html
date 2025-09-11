@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales Reports</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    input[type="date"] {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 7px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0069d9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    thead {
+      background-color: #007bff;
+      color: white;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .summary {
+      margin-top: 30px;
+      background-color: #e9f7ef;
+      padding: 15px;
+      border-radius: 5px;
+      color: #2d572c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sales Reports</h1>
+
+    <div class="filters">
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" />
+
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" />
+
+      <button onclick="filterReports()">Filter</button>
+    </div>
+
+    <table id="salesTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Product</th>
+          <th>Units Sold</th>
+          <th>Revenue ($)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sales data will go here -->
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <h2>Summary</h2>
+      <p>Total Units Sold: <span id="totalUnits">0</span></p>
+      <p>Total Revenue: $<span id="totalRevenue">0.00</span></p>
+    </div>
+  </div>
+
+  <script>
+    const salesData = [
+      { date: '2025-09-01', product: 'Product A', units: 10, revenue: 250 },
+      { date: '2025-09-03', product: 'Product B', units: 5, revenue: 150 },
+      { date: '2025-09-05', product: 'Product A', units: 7, revenue: 175 },
+      { date: '2025-09-10', product: 'Product C', units: 3, revenue: 90 },
+      { date: '2025-09-11', product: 'Product B', units: 6, revenue: 180 }
+    ];
+
+    function renderTable(data) {
+      const tableBody = document.querySelector("#salesTable tbody");
+      tableBody.innerHTML = "";
+
+      let totalUnits = 0;
+      let totalRevenue = 0;
+
+      data.forEach(sale => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${sale.date}</td>
+          <td>${sale.product}</td>
+          <td>${sale.units}</td>
+          <td>$${sale.revenue.toFixed(2)}</td>
+        `;
+        tableBody.appendChild(row);
+
+        totalUnits += sale.units;
+        totalRevenue += sale.revenue;
+      });
+
+      document.getElementById("totalUnits").textContent = totalUnits;
+      document.getElementById("totalRevenue").textContent = totalRevenue.toFixed(2);
+    }
+
+    function filterReports() {
+      const startDate = document.getElementById("startDate").value;
+      const endDate = document.getElementById("endDate").value;
+
+      const filteredData = salesData.filter(sale => {
+        const saleDate = new Date(sale.date);
+        const from = startDate ? new Date(startDate) : null;
+        const to = endDate ? new Date(endDate) : null;
+
+        if (from && saleDate < from) return false;
+        if (to && saleDate > to) return false;
+        return true;
+      });
+
+      renderTable(filteredData);
+    }
+
+    // Load initial data
+    renderTable(salesData);
+  </script>
+</body>
+</html>
