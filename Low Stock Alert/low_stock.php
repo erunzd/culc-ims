@@ -1,8 +1,9 @@
 <?php
-
 include 'db_connect.php';
 
-// -------- Config (defaults) --------
+if (method_exists($conn, 'set_charset')) { $conn->set_charset('utf8mb4'); }
+
+// Defaults
 $defaultThreshold   = 5;   // low-stock cutoff
 $defaultTargetLevel = 20;  // desired on-hand level
 
@@ -10,14 +11,14 @@ $defaultTargetLevel = 20;  // desired on-hand level
 $threshold   = isset($_GET['threshold']) ? (int)$_GET['threshold'] : $defaultThreshold;
 $targetLevel = isset($_GET['target'])    ? (int)$_GET['target']    : $defaultTargetLevel;
 
-// Basic guards
-if ($threshold < 0)   $threshold = 0;
-if ($targetLevel < 0) $targetLevel = 0;
+// Guards
+$threshold   = max(0, (int)$threshold);
+$targetLevel = max(0, (int)$targetLevel);
 
 // For "CRITICAL" cutoff we use threshold/2 (integer floor)
 $criticalCutoff = (int) floor($threshold / 2);
 
-// Build prepared query 
+// Prepared query (no schema changes required)
 $sql = "
 SELECT
   product_code,
@@ -56,9 +57,10 @@ if (!$stmt->execute()) {
 $result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Low Stock Alerts</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 24px; }
@@ -69,23 +71,20 @@ $result = $stmt->get_result();
     }
     .controls label { font-weight: bold; }
     .controls input[type="number"] {
-      width: 80px; padding: 6px; border: 1px solid #ccc; border-radius: 4px;
+      width: 100px; padding: 6px; border: 1px solid #ccc; border-radius: 4px;
     }
     .controls button {
       padding: 7px 14px; border: 0; border-radius: 4px; cursor: pointer;
       background: #007bff; color: #fff;
     }
     .alert {
-      background-color: #ffefef;
-      color: #7a0000;
-      padding: 10px 12px;
-      border: 1px solid #e2bcbc;
-      border-radius: 6px;
+      background: #ffefef; color: #7a0000;
+      padding: 10px 12px; border: 1px solid #e2bcbc; border-radius: 6px;
       margin: 10px 0 16px;
     }
     table { border-collapse: collapse; width: 100%; margin-top: 6px; }
     th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-    th { background-color: #f5f7fa; }
+    th { background: #f5f7fa; }
     tr:hover { background: #fafcff; }
 
     /* Severity highlights */
@@ -94,11 +93,8 @@ $result = $stmt->get_result();
     .sev-LOW      { background: #fffbe6; }
 
     .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: bold;
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 12px; font-weight: bold;
     }
     .pill.OUT      { background: #d32f2f; color: #fff; }
     .pill.CRITICAL { background: #f9a825; color: #000; }
@@ -114,16 +110,16 @@ $result = $stmt->get_result();
 
   <form class="controls" method="get" action="">
     <label for="threshold">Threshold ≤</label>
-    <input type="number" id="threshold" name="threshold" value="<?php echo htmlspecialchars($threshold); ?>" min="0" />
+    <input type="number" id="threshold" name="threshold" value="<?php echo htmlspecialchars((string)$threshold); ?>" min="0" />
     <label for="target">Target level</label>
-    <input type="number" id="target" name="target" value="<?php echo htmlspecialchars($targetLevel); ?>" min="0" />
+    <input type="number" id="target" name="target" value="<?php echo htmlspecialchars((string)$targetLevel); ?>" min="0" />
     <button type="submit">Apply</button>
-    <div class="meta">Critical cutoff is computed as ⌊threshold/2⌋ = <strong><?php echo $criticalCutoff; ?></strong></div>
+    <div class="meta">Critical cutoff = ⌊threshold/2⌋ = <strong><?php echo $criticalCutoff; ?></strong></div>
   </form>
 
-  <?php if ($result->num_rows > 0): ?>
+  <?php if ($result && $result->num_rows > 0): ?>
     <div class="alert">
-      Warning: Some products are low on stock (threshold ≤ <?php echo htmlspecialchars($threshold); ?>).
+      Warning: Some products are low on stock (threshold ≤ <?php echo htmlspecialchars((string)$threshold); ?>).
     </div>
 
     <table>
@@ -137,12 +133,12 @@ $result = $stmt->get_result();
           <th>Location</th>
           <th>Price</th>
           <th>Severity</th>
-          <th>Suggested Reorder Qty<br/>(to reach <?php echo htmlspecialchars($targetLevel); ?>)</th>
+          <th>Suggested Reorder Qty<br/>(to reach <?php echo htmlspecialchars((string)$targetLevel); ?>)</th>
         </tr>
       </thead>
       <tbody>
-        <?php while ($row = $result->fetch_assoc()): 
-          $sev = $row['severity'];
+        <?php while ($row = $result->fetch_assoc()):
+          $sev = (string)$row['severity'];
           $trClass = 'sev-' . $sev;
         ?>
           <tr class="<?php echo htmlspecialchars($trClass); ?>">
@@ -160,11 +156,12 @@ $result = $stmt->get_result();
       </tbody>
     </table>
   <?php else: ?>
-    <p class="empty">All stock levels are sufficient for the current threshold (≤ <?php echo htmlspecialchars($threshold); ?>).</p>
+    <p class="empty">All stock levels are sufficient for the current threshold (≤ <?php echo htmlspecialchars((string)$threshold); ?>).</p>
   <?php endif; ?>
 
 </body>
 </html>
 <?php
-$stmt->close();
+if (isset($result) && $result instanceof mysqli_result) { $result->free(); }
+if (isset($stmt)   && $stmt   instanceof mysqli_stmt)   { $stmt->close(); }
 $conn->close();
