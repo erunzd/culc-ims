@@ -1,0 +1,221 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    margin: 20px 0;
+    /* border-radius: 20px; */
+    overflow: hidden;
+    /* background-color: rgba(255, 255, 255, 0.7);  */
+    background-image: url(logos/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.left {
+    flex: 0.8;
+    padding: 60px;
+    padding-top: 13%;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+}
+
+.right {
+    flex: 1;
+    position: relative;
+    background-color: #8f8073;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 20px 0 0 20px;
+    margin: 60px 0;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.left p{
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    text-align: justify;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: white;
+    text-align: center;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form {
+    width: 80%; 
+    max-width: 500px; 
+    margin-right: 60px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+}
+
+button {
+    background-color: #f7f3e3;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #7a6d60;
+    ;
+}
+
+a {
+    color: #ffffff;
+}
+
+.dark-rectangle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    background-color: #3a1f1a; 
+    /* border-radius: 0 10px 10px 0; */
+}
+
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left, .right {
+        width: 100%;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+
+    .right {
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left, .right {
+        width: 100%;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+
+    .right {
+        border-radius: 10px;
+    }
+
+    .left p {
+        font-size: 14px;
+    }
+
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 992px) {
+    .left p {
+        font-size: 12px;
+    }
+
+    .input-group {
+        margin-bottom: 8px;
+    }
+
+    button {
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .left p {
+        font-size: 10px;
+    }
+
+    .input-group {
+        margin-bottom: 6px;
+    }
+
+    button {
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .left p {
+        font-size: 8px;
+    }
+
+    .input-group {
+        margin-bottom: 4px;
+    }
+
+    button {
+        padding: 2px 4px;
+    }
+}

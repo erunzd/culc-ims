@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cebu Universal Lumber Co. Employees</title>
+    <link rel="stylesheet" href="html.css">
+</head>
+
+<body>
+    <div class="header">
+        <h2>Cebu Universal Lumber Co.</h2>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="dash.html"><img src="logos/homelogo.png" alt="Dashboard Icon" class="icon">Dashboard</a>
+                </li>
+                <li><a href="inventory.html"><img src="logos/inventory.png" alt="Inventory Icon"
+                            class="icon">Inventory</a></li>
+                <li><a href="orders.html"><img src="logos/orders.png" alt="Orders Icon" class="icon">Orders</a></li>
+                <li><a href="customers.html"><img src="logos/customers.png" alt="Customers Icon"
+                            class="icon">Customers</a></li>
+                <li><a href="employees.html" class="active"><img src="logos/employees.png" alt="Employees Icon"
+                            class="icon">Employees</a></li>
+                <li><a href="datalog.html"><img src="logos/datalog.png" alt="Data Logs Icon" class="icon">Data Logs</a>
+                </li>
+            </ul>
+            <ul class="bottom">
+                <li><a href="profile.html"><img src="logos/profile.png" alt="Profile Icon" class="icon">Profile</a></li>
+                <li><a href="logout.php"><img src="logos/logout.png" alt="Log Out Icon" class="icon">Log Out</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="pagename">
+                <p> 🏠 / Employees</p>
+            </div>
+            <section class="employeescontent">
+                <div class="employeestoolbar">
+                    <button id="employeeseditRecordBtn"><img src="logos/update.png" alt="Edit Record"
+                            class="nav-logo">Edit Record</button>
+                    <button id="employeesaddRecordBtn"><img src="logos/add.png" alt="Add Record" class="nav-logo">Add
+                        Record</button>
+                    <button id="employeesdeleteRecordBtn"><img src="logos/delete.png" alt="Delete Record"
+                            class="nav-logo">Delete Record</button>
+                </div>
+                <div class="employeessearchbar">
+                    <input type="text" id="employeessearchInput" placeholder="Search."
+                        onkeydown="if (event.key === 'Enter') employeessearchRecord()">
+                    <button onclick="employeessearchRecord()"><img src="logos/search.png" class="nav-logo"></button>
+                </div>
+                <div class="employeessearch-results">
+                    <p style="font-size: 30px; text-align: center;">No Searches</p>
+                </div>
+                <div class="employeesrecord-list">
+                    <div class="employeesort-container">
+                        <img src="logos/sort.svg">
+                        <select id="employeesortBy" onchange="employeesSortRecord()">
+                            <option value="">Select</option>
+                            <option value="name">Name</option>
+                            <option value="permission">Permission (A-Z)</option>
+                            <option value="department">Department (A-Z)</option>
+                        </select>
+                    </div>
+                    <h2 style="text-align: center;">Employee Record</h2>
+                    <table id="employeesTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Contact Number</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Permission</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeesrecordTableBody">
+                            <!-- Records will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        <div id="employeeseditRecordModal" class="employeesmodal">
+            <div class="employeesmodal-content">
+                <span class="employeesclose">&times;</span>
+                <h2>Edit Record</h2>
+                <form id="employeeseditForm">
+                    <label for="employeeseditEmployeeId">Employee ID</label><br>
+                    <input type="number" id="employeeseditEmployeeId" name="employee_id"><br>
+                    <label for="employeeseditFirstName">First Name</label><br>
+                    <input type="text" id="employeeseditFirstName" name="first_name"><br>
+                    <label for="employeeseditLastName">Last Name</label><br>
+                    <input type="text" id="employeeseditLastName" name="last_name"><br>
+                    <label for="employeeseditContactNumber">Contact Number</label><br>
+                    <input type="text" id="employeeseditContactNumber" name="contact_number"><br>
+                    <label for="employeeseditEmail">Email</label><br>
+                    <input type="email" id="employeeseditEmail" name="email"><br>
+                    <label for="employeeseditDepartment">Department</label><br>
+                    <select id="employeeseditDepartment" name="department">
+                        <option value="production">Production</option>
+                        <option value="transport">Transport</option>
+                        <option value="sales">Sales</option>
+                        <option value="hr">HR</option>
+                        <option value="finance">Finance</option>
+                    </select><br>
+                    <label for="employeeseditPermission">Permission</label><br>
+                    <select id="employeeseditPermission" name="permission">
+                        <option value="admin">Admin</option>
+                        <option value="employee">Employee</option>
+                    </select><br>
+                    <button type="button" class="employeessave-btn" onclick="employeessaveEdit()">Save</button>
+                </form>
+            </div>
+        </div>
+        <div id="employeesaddRecordModal" class="employeesmodal">
+            <div class="employeesmodal-content">
+                <span class="employeesclose">&times;</span>
+                <h2>Add Record</h2>
+                <form id="employeesaddForm">
+                    <label for="employeesaddEmployeeId">Employee ID</label><br>
+                    <input type="number" id="employeesaddEmployeeId" name="employee_id"><br>
+                    <label for="employeesaddFirstName">First Name</label><br>
+                    <input type="text" id="employeesaddFirstName" name="first_name"><br>
+                    <label for="employeesaddLastName">Last Name</label><br>
+                    <input type="text" id="employeesaddLastName" name="last_name"><br>
+                    <label for="employeesaddContactNumber">Contact Number</label><br>
+                    <input type="text" id="employeesaddContactNumber" name="contact_number"><br>
+                    <label for="employeesaddEmail">Email</label><br>
+                    <input type="email" id="employeesaddEmail" name="email"><br>
+                    <label for="employeesaddDepartment">Department</label><br>
+                    <select id="employeesaddDepartment" name="department">
+                        <option value="production">Production</option>
+                        <option value="transport">Transport</option>
+                        <option value="sales">Sales</option>
+                        <option value="hr">HR</option>
+                        <option value="finance">Finance</option>
+                    </select><br>
+                    <label for="employeesaddPermission">Permission</label><br>
+                    <select id="employeesaddPermission" name="permission">
+                        <option value="admin">Admin</option>
+                        <option value="employee">Employee</option>
+                    </select><br>
+                    <button type="button" class="employeessave-btn" onclick="employeessaveAdd()">Save</button>
+                </form>
+            </div>
+        </div>
+        <div id="employeesdeleteRecordModal" class="employeesmodal">
+            <div class="employeesmodal-content">
+                <span class="employeesclose">&times;</span>
+                <h2>Delete Record</h2>
+                <form id="employeesdeleteForm">
+                    <label for="employeesdeleteEmployeeId">Employee ID</label><br>
+                    <input type="text" id="employeesdeleteEmployeeId" name="employee_id"><br>
+                    <button type="button" class="employeessave-btn" onclick="employeesconfirmDelete()">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="employees.js"></script>
+</body>
+
+</html>

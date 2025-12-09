@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cebu Universal Lumber Co. Customers</title>
+    <link rel="stylesheet" href="html.css">
+</head>
+
+<body>
+    <div class="header">
+        <h2>Cebu Universal Lumber Co.</h2>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="dash.html"><img src="logos/homelogo.png" alt="Dashboard Icon" class="icon">Dashboard</a>
+                </li>
+                <li><a href="inventory.html" class="active"><img src="logos/inventory.png" alt="Inventory Icon"
+                            class="icon">Inventory</a></li>
+                <li><a href="orders.html"><img src="logos/orders.png" alt="Orders Icon" class="icon">Orders</a></li>
+                <li><a href="customers.html"><img src="logos/customers.png" alt="Customers Icon"
+                            class="icon">Customers</a></li>
+                <li><a href="employees.html"><img src="logos/employees.png" alt="Employees Icon"
+                            class="icon">Employees</a></li>
+                <li><a href="datalog.html"><img src="logos/datalog.png" alt="Data Logs Icon" class="icon">Data Logs</a>
+                </li>
+            </ul>
+            <ul class="bottom">
+                <li><a href="profile.html"><img src="logos/profile.png" alt="Profile Icon" class="icon">Profile</a></li>
+                <li><a href="logout.php"><img src="logos/logout.png" alt="Log Out Icon" class="icon">Log Out</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="pagename">
+                <p> 🏠 / Customers</p>
+            </div>
+            <section class="customerscontent">
+                <div class="customerstoolbar">
+                    <button id="customerseditRecordBtn"><img src="logos/update.png" alt="Edit Icon"
+                            class="nav-logo">Edit Record</button>
+                    <button id="customersaddRecordBtn"><img src="logos/add.png" alt="Add Icon" class="nav-logo">Add
+                        Record</button>
+                    <button id="customersdeleteRecordBtn"><img src="logos/delete.png" alt="Delete Icon"
+                            class="nav-logo">Delete Record</button>
+                </div>
+                <div class="customerssearchbar">
+                    <input type="text" id="customerssearchInput" placeholder="Search..."
+                        onkeydown="if (event.key === 'Enter') customerssearchRecord()">
+                    <button onclick="customerssearchRecord()"><img src="logos/search.png" class="nav-logo"></button>
+                </div>
+                <div class="customerssearch-results">
+                    <p style="font-size: 30px; text-align: center;">No Searches</p>
+                </div>
+                <div class="customersrecord-list">
+                    <div class="customers-sort-options">
+                        <img src="logos/sort.svg">
+                        <select id="sortSelect" onchange="customersSortRecords()">
+                            <option value="nameAsc">Name (A-Z)</option>
+                            <option value="nameDesc">Name (Z-A)</option>
+                            <option value="credibilityAsc">Credibility (Ascending)</option>
+                            <option value="credibilityDesc">Credibility (Descending)</option>
+                        </select>
+                    </div>
+                    <h2 style="text-align: center;">Customer Record</h2>
+                    <table>
+                        <thead>
+                            <tr><strong>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Contact Number</th>
+                                    <th>Email</th>
+                                    <th>Credibility</th>
+                                </strong></tr>
+                        </thead>
+                        <tbody id="customersrecordTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="customerseditRecordModal" class="customersmodal">
+        <div class="customersmodal-content">
+            <span class="customersclose">&times;</span>
+            <h2>Edit Record</h2>
+            <form id="customerseditForm"><strong>
+                    <label for="customerseditCustomerId">Customer ID</label><br>
+                    <input type="number" id="customerseditCustomerId" name="customer_id"><br>
+                    <label for="customerseditName">Name</label><br>
+                    <input type="text" id="customerseditName" name="name"><br>
+                    <label for="customerseditContactNumber">Contact Number</label><br>
+                    <input type="text" id="customerseditContactNumber" name="contact_number"><br>
+                    <label for="customerseditEmail">Email</label><br>
+                    <input type="email" id="customerseditEmail" name="email"><br>
+                    <label for="customerseditCredibility">Credibility</label><br>
+                    <select id="customerseditCredibility" name="credibility_status">
+                        <option value="Trusted">Trusted</option>
+                        <option value="Not Trusted">Not Trusted</option>
+                    </select><br>
+                    <button type="button" class="customerssave-btn" onclick="customerssaveEdit()">Save</button>
+                </strong></form>
+        </div>
+    </div>
+    <div id="customersaddRecordModal" class="customersmodal">
+        <div class="customersmodal-content">
+            <span class="customersclose">&times;</span>
+            <h2>Add Record</h2>
+            <form id="customersaddForm"><strong>
+
+                    <label for="customersaddName">Name</label><br>
+                    <input type="text" id="customersaddName" name="name"><br>
+                    <label for="customersaddContactNumber">Contact Number</label><br>
+                    <input type="text" id="customersaddContactNumber" name="contact_number"><br>
+                    <label for="customersaddEmail">Email</label><br>
+                    <input type="email" id="customersaddEmail" name="email"><br>
+                    <label for="customersaddCredibility">Credibility</label><br>
+                    <select id="customersaddCredibility" name="credibility_status">
+                        <option value="Trusted">Trusted</option>
+                        <option value="Not Trusted">Not Trusted</option>
+                    </select><br>
+                    <button type="button" class="customerssave-btn" onclick="customerssaveAdd()">Save</button>
+                </strong></form>
+        </div>
+    </div>
+    <div id="customersdeleteRecordModal" class="customersmodal">
+        <div class="customersmodal-content">
+            <span class="customersclose">&times;</span>
+            <h2>Delete Record</h2>
+            <form id="customersdeleteForm"><strong>
+                    <label for="customersdeleteCustomerId">Customer ID</label>
+                    <input type="text" id="customersdeleteCustomerId" name="customer_id"><br>
+                    <button type="button" class="customerssave-btn" onclick="customersconfirmDelete()">Delete</button>
+                </strong> </form>
+        </div>
+    </div>
+    <script src="customers.js"></script>
+</body>
+
+</html>

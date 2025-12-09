@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Cebu Universal Lumber Co.</h1>
+            <h2>INVENTORY</h2>
+            <p>The inventory management system is the comprehensive solution for efficiently managing and tracking the extensive lumber inventory at Cebu Universal Lumber Co. With real-time tracking, stay updated on stock levels and ensure always having the necessary inventory on hand. Seamlessly manage incoming and outgoing orders with accurate records, and generate detailed reports to analyze inventory trends and make informed business decisions.</p>
+            <p>The system automates routine tasks and reduces manual errors, streamlining operations and saving valuable time. With its user-friendly interface ensuring easy navigation, enjoy effortlessly accessing essential functions and data with your team. At Cebu Universal Lumber Co., we are committed to providing you with the best tools to optimize your inventory, prevent overstocking or stockouts, and enhance overall efficiency for the smooth operation of the lumber business.</p>
+        </div>
+        <div class="right">
+            <form id="loginForm" action="login.php" method="POST">
+                <h2>Login</h2>
+                <div id="error-message" style="display:none; color: red;"></div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="checkbox">
+                        Remember Me
+                    </label>
+                    <a href="#">Forgot Password</a>
+                </div>
+                <button type="submit">Login</button>
+                <p>Not registered yet? <a href="create.html">Create an account</a></p>
+            </form>
+            <div class="dark-rectangle"></div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

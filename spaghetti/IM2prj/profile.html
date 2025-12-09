@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cebu Universal Lumber Co. Profile</title>
+    <link rel="stylesheet" href="html.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Cebu Universal Lumber Co.</h2>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="dash.html"><img src="logos/homelogo.png" alt="Dashboard Icon" class="icon">Dashboard</a></li>
+                <li><a href="inventory.html"><img src="logos/inventory.png" alt="Inventory Icon" class="icon">Inventory</a></li>
+                <li><a href="orders.html"><img src="logos/orders.png" alt="Orders Icon" class="icon">Orders</a></li>
+                <li><a href="customers.html"><img src="logos/customers.png" alt="Customers Icon" class="icon">Customers</a></li>
+                <li><a href="employees.html"><img src="logos/employees.png" alt="Employees Icon" class="icon">Employees</a></li>
+                <li><a href="datalog.html"><img src="logos/datalog.png" alt="Data Logs Icon" class="icon">Data Logs</a></li>
+            </ul>
+            <ul class="bottom">
+                <li><a href="profile.html" class="active"><img src="logos/profile.png" alt="Profile Icon" class="icon">Profile</a></li>
+                <li><a href="logout.php"><img src="logos/logout.png" alt="Log Out Icon" class="icon">Log Out</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="pagename">
+                <p> 🏠 / Profile</p>
+            </div>
+            <div class="profile-container">
+                <div class="profile-picture">
+                    <img src="logos/defaultprofile.png" alt="Profile Picture" class="circle" id="profile-picture">
+                    <div class="upload-options">
+                        <input type="file" id="profile-picture-upload" accept="image/*">
+                        <div><label for="profile-picture-upload" id="upload-label">Upload Profile Picture</label></div>
+                        <div class="button-container">
+                            <button id="edit-picture" style="display: none;">Edit</button>
+                            <button id="save-picture" style="display: none;">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-details">
+                        <p><strong>Name:</strong> <span id="employeeName"></span></p>
+                        <p><strong>Role:</strong> <span id="employeeRole"></span></p>
+                        <p><strong>Contact Number:</strong> <span id="employeeContactNumber"></span></p>
+                        <p><strong>Email:</strong> <span id="employeeEmail"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="profile.js"></script>
+</body>
+</html>

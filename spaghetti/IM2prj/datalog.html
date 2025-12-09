@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cebu Universal Lumber Co. Data-Log</title>
+    <link rel="stylesheet" href="html.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Cebu Universal Lumber Co.</h2>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="dash.html"><img src="logos/homelogo.png" alt="Dashboard Icon" class="icon">Dashboard</a></li>
+                <li><a href="inventory.html"  class="active"><img src="logos/inventory.png" alt="Inventory Icon" class="icon">Inventory</a></li>
+                <li><a href="orders.html"><img src="logos/orders.png" alt="Orders Icon" class="icon">Orders</a></li>
+                <li><a href="customers.html"><img src="logos/customers.png" alt="Customers Icon" class="icon">Customers</a></li>
+                <li><a href="employees.html"><img src="logos/employees.png" alt="Employees Icon" class="icon">Employees</a></li>
+                <li><a href="datalog.html"><img src="logos/datalog.png" alt="Data Logs Icon" class="icon">Data Logs</a></li>
+            </ul>
+            <ul class="bottom">
+                <li><a href="profile.html"><img src="logos/profile.png" alt="Profile Icon" class="icon">Profile</a></li>
+                <li><a href="logout.php"><img src="logos/logout.png" alt="Log Out Icon" class="icon">Log Out</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="pagename">
+                <p> 🏠 / Data Logs
+            </div>
+            <section class="datalogcontentarea">
+                <div class="datalogrecord-list">
+                    <div class="datalog-table-container">
+                        <h3 class="tabletitle">Sales</h3>
+                        <table id="sales-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Employee ID</th>
+                                    <th>Employee Name</th>
+                                    <th>Task</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sales-table-body">
+                                <!-- sales data logs records -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="datalog-table-container">
+                        <h3 class="tabletitle">Inventory</h3>
+                        <table id="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Employee ID</th>
+                                    <th>Employee Name</th>
+                                    <th>Task</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-table-body">
+                                <!-- inventory data logs records -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="datalog-table-container">
+                        <h3 class="tabletitle">Production</h3>
+                        <table id="production-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Employee ID</th>
+                                    <th>Employee Name</th>
+                                    <th>Task</th>
+                                </tr>
+                            </thead>
+                            <tbody id="production-table-body">
+                                <!-- production data logs records -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="datalog.js"></script>
+</body>
+</html>
